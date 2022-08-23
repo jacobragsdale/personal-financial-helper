@@ -1,0 +1,116 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper\\PersonalFinancialHelper.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper.Models\\PersonalFinancialHelper.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper.Models\\PersonalFinancialHelper.Models.csproj",
+        "projectName": "PersonalFinancialHelper.Models",
+        "projectPath": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper.Models\\PersonalFinancialHelper.Models.csproj",
+        "packagesPath": "C:\\Users\\desktop\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\desktop\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\desktop\\.dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper\\PersonalFinancialHelper.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper\\PersonalFinancialHelper.csproj",
+        "projectName": "PersonalFinancialHelper",
+        "projectPath": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper\\PersonalFinancialHelper.csproj",
+        "packagesPath": "C:\\Users\\desktop\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\desktop\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper.Models\\PersonalFinancialHelper.Models.csproj": {
+                "projectPath": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper.Models\\PersonalFinancialHelper.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\desktop\\.dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

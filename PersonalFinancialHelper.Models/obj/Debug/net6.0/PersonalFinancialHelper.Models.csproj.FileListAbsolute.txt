@@ -1,0 +1,12 @@
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\bin\Debug\net6.0\PersonalFinancialHelper.Models.deps.json
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\bin\Debug\net6.0\PersonalFinancialHelper.Models.dll
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\bin\Debug\net6.0\PersonalFinancialHelper.Models.pdb
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\obj\Debug\net6.0\PersonalFinancialHelper.Models.csproj.AssemblyReference.cache
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\obj\Debug\net6.0\PersonalFinancialHelper.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\obj\Debug\net6.0\PersonalFinancialHelper.Models.AssemblyInfoInputs.cache
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\obj\Debug\net6.0\PersonalFinancialHelper.Models.AssemblyInfo.cs
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\obj\Debug\net6.0\PersonalFinancialHelper.Models.csproj.CoreCompileInputs.cache
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\obj\Debug\net6.0\PersonalFinancialHelper.Models.dll
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\obj\Debug\net6.0\refint\PersonalFinancialHelper.Models.dll
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\obj\Debug\net6.0\PersonalFinancialHelper.Models.pdb
+C:\Users\desktop\Development\ConsoleApp1\PersonalFinancialHelper.Models\obj\Debug\net6.0\ref\PersonalFinancialHelper.Models.dll

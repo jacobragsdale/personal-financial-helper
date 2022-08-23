@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "PersonalFinancialHelper/1.0.0": {
+        "dependencies": {
+          "PersonalFinancialHelper.Models": "1.0.0"
+        },
+        "runtime": {
+          "PersonalFinancialHelper.dll": {}
+        }
+      },
+      "PersonalFinancialHelper.Models/1.0.0": {
+        "runtime": {
+          "PersonalFinancialHelper.Models.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PersonalFinancialHelper/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PersonalFinancialHelper.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

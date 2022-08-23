@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinancialHelper", "PersonalFinancialHelper\PersonalFinancialHelper.csproj", "{7C18D822-F046-496A-AD97-C45A4FD383EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinancialHelper.Models", "PersonalFinancialHelper.Models\PersonalFinancialHelper.Models.csproj", "{C2031AA4-5CDC-49D0-97E2-A6C66D1B0732}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C18D822-F046-496A-AD97-C45A4FD383EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C18D822-F046-496A-AD97-C45A4FD383EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C18D822-F046-496A-AD97-C45A4FD383EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C18D822-F046-496A-AD97-C45A4FD383EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2031AA4-5CDC-49D0-97E2-A6C66D1B0732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2031AA4-5CDC-49D0-97E2-A6C66D1B0732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2031AA4-5CDC-49D0-97E2-A6C66D1B0732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2031AA4-5CDC-49D0-97E2-A6C66D1B0732}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
