@@ -1,28 +1,27 @@
 ﻿namespace PersonalFinancialHelper.Models;
 
-public class RentModel
+public class RentModel : BaseModel
 {
-    private int MonthlyRent { get; set; }
-    private int ParkingFee { get; set; }
-    private int RentersInsurance { get; set; } //14.00
-
-    private List<int> TotalAmountPaid { get; set; } = new();
-    private int LeaseTerm { get; set; } //months
-
-    public RentModel(int monthlyRent, int parkingFee, int rentersInsurance, int leaseTerm)
+    public RentModel(DateTime startDate, DateTime endDate, int monthlyRent, int parkingFee, int rentersInsurance)
     {
+        StartDate = startDate;
+        EndDate = endDate;
         MonthlyRent = monthlyRent;
         ParkingFee = parkingFee;
         RentersInsurance = rentersInsurance;
         TotalAmountPaid.Add(monthlyRent);
-        LeaseTerm = leaseTerm;
-        
+
         RunModel();
     }
-    
+
+    private int MonthlyRent { get; }
+    private int ParkingFee { get; }
+    private int RentersInsurance { get; } //14.00
+    private List<int> TotalAmountPaid { get; } = new();
+
     public void Print()
     {
-        for (var i = 0; i < LeaseTerm; i++)
+        for (var i = 0; i < GetTotalMonths(); i++)
         {
             Console.WriteLine("\n============================================\n");
             Console.WriteLine("Month " + i);
@@ -32,15 +31,11 @@ public class RentModel
 
     private void RunModel()
     {
-        for (var i = 0; i < LeaseTerm; i++)
-        {
-            TotalAmountPaid.Add(TotalAmountPaid[^1] + CalcTotalMonthlyPayment());
-        }
+        for (var i = 0; i < GetTotalMonths(); i++) TotalAmountPaid.Add(TotalAmountPaid[^1] + CalcTotalMonthlyPayment());
     }
 
     private int CalcTotalMonthlyPayment()
     {
         return MonthlyRent + ParkingFee + RentersInsurance;
     }
-    
 }

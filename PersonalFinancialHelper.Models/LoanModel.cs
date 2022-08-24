@@ -1,44 +1,42 @@
 ﻿namespace PersonalFinancialHelper.Models;
 
-public class LoanModel
+public class LoanModel : BaseModel
 {
-    protected int PurchasePrice { get; set; }
-    protected int DownPayment { get; set; }
-    protected int LoanAmount { get; set; }
-    protected int LoanTerm { get; set; } //in months
-    protected double AnnualAnnualInterestRate { get; set; }
-    protected double MonthlyInterestRate { get; set; }
-    protected List<double> RemainingPrinciple { get; set; } = new();
-    protected List<double> TotalAmountPaid { get; set; } = new();
-    protected List<double> TotalPrinciplePaid { get; set; } = new();
-    protected List<double> TotalInterestPaid { get; set; } = new();
-    protected int CurrentMonth { get; set; }
-
     protected LoanModel()
     {
-        
     }
-    
-    public LoanModel(int purchasePrice, int downPayment, int loanTerm, double annualInterestRate)
+
+    public LoanModel(DateTime startDate, DateTime endDate, int purchasePrice, int downPayment, double annualInterestRate)
     {
+        StartDate = startDate;
+        EndDate = endDate;
         PurchasePrice = purchasePrice;
         DownPayment = downPayment;
         LoanAmount = PurchasePrice - DownPayment;
-        LoanTerm = loanTerm;
         AnnualAnnualInterestRate = annualInterestRate;
         MonthlyInterestRate = AnnualAnnualInterestRate / 12;
-        
+
         RemainingPrinciple.Add(PurchasePrice - DownPayment);
         TotalAmountPaid.Add(DownPayment);
         TotalPrinciplePaid.Add(DownPayment);
         TotalInterestPaid.Add(0.0);
-        
+
         RunModel();
     }
 
+    protected int PurchasePrice { get; set; }
+    protected int DownPayment { get; set; }
+    protected int LoanAmount { get; set; }
+    protected double AnnualAnnualInterestRate { get; set; }
+    protected double MonthlyInterestRate { get; set; }
+    protected List<double> RemainingPrinciple { get; } = new();
+    protected List<double> TotalAmountPaid { get; } = new();
+    protected List<double> TotalPrinciplePaid { get; } = new();
+    protected List<double> TotalInterestPaid { get; } = new();
+
     public void Print()
     {
-        for (var i = 0; i < LoanTerm; i++)
+        for (var i = 0; i < GetTotalMonths(); i++)
         {
             Console.WriteLine("\n============================================\n");
             Console.WriteLine("Month " + i);
@@ -50,13 +48,12 @@ public class LoanModel
 
     private void RunModel()
     {
-        for (var i = 0; i < LoanTerm; i++)
+        for (var i = 0; i < GetTotalMonths(); i++)
         {
             TotalAmountPaid.Add(TotalAmountPaid[^1] + CalcMonthlyLoanPayment());
             TotalPrinciplePaid.Add(TotalPrinciplePaid[^1] + CalcMonthlyPrinciplePayment());
             TotalInterestPaid.Add(TotalInterestPaid[^1] + CalcMonthlyInterestPayment());
             RemainingPrinciple.Add(RemainingPrinciple[^1] - CalcMonthlyPrinciplePayment());
-            CurrentMonth += 1;
         }
     }
 
@@ -72,7 +69,7 @@ public class LoanModel
 
     protected double CalcMonthlyLoanPayment()
     {
-        return LoanAmount * MonthlyInterestRate * Math.Pow(1 + MonthlyInterestRate, LoanTerm) /
-               (Math.Pow(1 + MonthlyInterestRate, LoanTerm) - 1);
+        return LoanAmount * MonthlyInterestRate * Math.Pow(1 + MonthlyInterestRate, GetTotalMonths()) /
+               (Math.Pow(1 + MonthlyInterestRate, GetTotalMonths()) - 1);
     }
 }

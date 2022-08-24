@@ -6,15 +6,18 @@ public class Program
 {
     public static void Main()
     {
-        var mortgage = new MortgageModel(349900, 13000, 360, .04766, 176, 211, 190, 140);
-        // mortgage.Print();
-        var rent = new RentModel(2700, 0, 14, 12);
-        // rent.Print();
+        var startDate = new DateTime(2022, 1, 1);
+        var endDate = new DateTime(2025, 1, 1);
         
-        var loan = new LoanModel(349900, 13000, 360, .04766);
+        var mortgage = new MortgageModel(startDate, endDate, 349900, 13000,  .04766, 176, 211, 190, 140);
+        // mortgage.Print();
+        var rent = new RentModel(startDate, endDate, 2700, 0, 14);
+        // rent.Print();
+
+        var loan = new LoanModel(startDate, endDate, 349900, 13000, .04766);
         // loan.Print();
 
-        var portfolio = new InvestmentPortfolioModel(20000, 2000, 0.10, 36);
+        var portfolio = new InvestmentPortfolioModel(startDate, endDate, 20000, 2000, 0.10);
         portfolio.Print();
     }
 }
