@@ -29,9 +29,24 @@ public class RentModel : BaseModel
         }
     }
 
-    private void RunModel()
+    public sealed override double CalcTotalGain()
     {
-        for (var i = 0; i < GetTotalMonths(); i++) TotalAmountPaid.Add(TotalAmountPaid[^1] + CalcTotalMonthlyPayment());
+        return 0.0;
+    }
+
+    public sealed override double CalcTotalLoss()
+    {
+        return CalcTotalMonthlyPayment();
+    }
+
+    public sealed override void RunModel()
+    {
+        for (var i = 0; i < GetTotalMonths(); i++)
+        {
+            TotalAmountPaid.Add(TotalAmountPaid[^1] + CalcTotalMonthlyPayment());
+            TotalGain.Add(TotalGain[^1] + CalcTotalGain());
+            TotalLoss.Add(TotalLoss[^1] + CalcTotalLoss());
+        }
     }
 
     private int CalcTotalMonthlyPayment()

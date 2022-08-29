@@ -46,7 +46,7 @@ public class LoanModel : BaseModel
         }
     }
 
-    private void RunModel()
+    public override void RunModel()
     {
         for (var i = 0; i < GetTotalMonths(); i++)
         {
@@ -55,6 +55,16 @@ public class LoanModel : BaseModel
             TotalInterestPaid.Add(TotalInterestPaid[^1] + CalcMonthlyInterestPayment());
             RemainingPrinciple.Add(RemainingPrinciple[^1] - CalcMonthlyPrinciplePayment());
         }
+    }
+
+    public override double CalcTotalGain()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override double CalcTotalLoss()
+    {
+        throw new NotImplementedException();
     }
 
     protected double CalcMonthlyInterestPayment()

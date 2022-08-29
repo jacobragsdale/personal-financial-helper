@@ -39,7 +39,7 @@ public class MortgageModel : LoanModel
     private List<double> TotalAmountLost { get; } = new();
     private List<double> TotalFeesPaid { get; } = new();
 
-    private void RunModel()
+    public sealed override void RunModel()
     {
         for (var i = 0; i < GetTotalMonths(); i++)
         {

@@ -23,6 +23,16 @@ public class InvestmentPortfolioModel : BaseModel
     private List<double> TotalValue { get; } = new();
     private List<double> TotalAmountInvested { get; } = new();
     private List<double> TotalReturn { get; } = new();
+    
+    public sealed override double CalcTotalGain()
+    {
+        return 0.0;
+    }
+
+    public sealed override double CalcTotalLoss()
+    {
+        return CalcTotalValue();
+    }
 
     public void Print()
     {
@@ -36,7 +46,7 @@ public class InvestmentPortfolioModel : BaseModel
         }
     }
 
-    private void RunModel()
+    public sealed override void RunModel()
     {
         for (var i = 0; i < GetTotalMonths(); i++)
         {
