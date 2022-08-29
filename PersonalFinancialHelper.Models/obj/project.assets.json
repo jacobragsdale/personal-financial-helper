@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\desktop\\.nuget\\packages\\": {}
+    "/Users/jacob/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper.Models\\PersonalFinancialHelper.Models.csproj",
+      "projectUniqueName": "/Users/jacob/Dev/personal-fincancial-helper/PersonalFinancialHelper.Models/PersonalFinancialHelper.Models.csproj",
       "projectName": "PersonalFinancialHelper.Models",
-      "projectPath": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper.Models\\PersonalFinancialHelper.Models.csproj",
-      "packagesPath": "C:\\Users\\desktop\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper.Models\\obj\\",
+      "projectPath": "/Users/jacob/Dev/personal-fincancial-helper/PersonalFinancialHelper.Models/PersonalFinancialHelper.Models.csproj",
+      "packagesPath": "/Users/jacob/.nuget/packages/",
+      "outputPath": "/Users/jacob/Dev/personal-fincancial-helper/PersonalFinancialHelper.Models/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\desktop\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/jacob/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -49,7 +49,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -58,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\desktop\\.dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/jacob/.dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
       }
     }
   }

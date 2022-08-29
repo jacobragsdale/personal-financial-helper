@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Zp3O5iMKlyDSab6i4RHs/+Qa+szFP/wYK2ikIQ4MW5ZNf6Gp+5G9/xlHAiYh/DSz7/XJ98Wb2pNmTEle5OkfIA==",
+  "dgSpecHash": "JrunL3lcRnaxzBO9dhhhbAebp85qOXdJ938S+yLsljEAcfQUTHQEtpOEAlkNDC2IQA5iluKUtuu15ZpsSzTaKQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\desktop\\Development\\ConsoleApp1\\PersonalFinancialHelper.Models\\PersonalFinancialHelper.Models.csproj",
+  "projectFilePath": "/Users/jacob/Dev/personal-fincancial-helper/PersonalFinancialHelper.Models/PersonalFinancialHelper.Models.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -24,11 +24,11 @@ public class LoanModel : BaseModel
         RunModel();
     }
 
-    protected int PurchasePrice { get; set; }
-    protected int DownPayment { get; set; }
-    protected int LoanAmount { get; set; }
-    protected double AnnualAnnualInterestRate { get; set; }
-    protected double MonthlyInterestRate { get; set; }
+    protected int PurchasePrice { get; init; }
+    protected int DownPayment { get; init; }
+    protected int LoanAmount { get; init; }
+    protected double AnnualAnnualInterestRate { get; init; }
+    protected double MonthlyInterestRate { get; init; }
     protected List<double> RemainingPrinciple { get; } = new();
     protected List<double> TotalAmountPaid { get; } = new();
     protected List<double> TotalPrinciplePaid { get; } = new();

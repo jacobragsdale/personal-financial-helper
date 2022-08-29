@@ -10,8 +10,6 @@
 public class BasketModel : BaseModel
 {
     private readonly List<BaseModel> _models = new();
-    protected List<double> TotalGain = new();
-    protected List<double> TotalLoss = new();
 
     public BasketModel(IEnumerable<BaseModel> models)
     {
