@@ -9,7 +9,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\PersonalFinancialHelper.Models\PersonalFinancialHelper.Models.csproj"/>
+        <ProjectReference Include="..\PersonalFinancialHelper.Models\PersonalFinancialHelper.Models.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="obj\**" />
     </ItemGroup>
 
 </Project>

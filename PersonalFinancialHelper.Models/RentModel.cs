@@ -9,7 +9,9 @@ public class RentModel : BaseModel
         MonthlyRent = monthlyRent;
         ParkingFee = parkingFee;
         RentersInsurance = rentersInsurance;
-        TotalAmountPaid.Add(monthlyRent);
+        TotalAmountPaid.Add(CalcTotalMonthlyPayment());
+        TotalGain.Add(0);
+        TotalLoss.Add(CalcTotalMonthlyPayment());
 
         RunModel();
     }
