@@ -11,7 +11,7 @@ public class BasketModel : BaseModel
 {
     private readonly List<BaseModel> _models = new();
 
-    public BasketModel(IEnumerable<BaseModel> models)
+    public BasketModel(DateTime startDate, DateTime endDate, IEnumerable<BaseModel> models) : base(startDate, endDate)
     {
         _models.AddRange(models);
         RunModel();

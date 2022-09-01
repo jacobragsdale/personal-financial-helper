@@ -5,33 +5,42 @@
 // Make some constants
 // 
 
-public class MortgageModel : LoanModel
+public class MortgageModel : BaseModel
 {
-    public MortgageModel(DateTime startDate, DateTime endDate, int purchasePrice, int downPayment, double annualInterestRate, int propertyTax,
-        int homeInsurance, int mortgageInsurance, int homeOwnersAssociationFees)
+    public MortgageModel(DateTime startDate, DateTime endDate, int purchasePrice, int downPayment,
+        double annualInterestRate, int propertyTax,
+        int homeInsurance, int mortgageInsurance, int homeOwnersAssociationFees) : base(startDate, endDate)
     {
-        StartDate = startDate;
-        EndDate = endDate;
         PurchasePrice = purchasePrice;
         DownPayment = downPayment;
         LoanAmount = PurchasePrice - DownPayment;
         AnnualAnnualInterestRate = annualInterestRate;
         MonthlyInterestRate = AnnualAnnualInterestRate / 12;
+
+        RemainingPrinciple.Add(PurchasePrice - DownPayment);
+        TotalAmountPaid.Add(DownPayment);
+        TotalPrinciplePaid.Add(DownPayment);
+        TotalInterestPaid.Add(0.0);
         PropertyTax = propertyTax;
         HomeInsurance = homeInsurance;
         MortgageInsurance = mortgageInsurance;
         HomeOwnersAssociationFees = homeOwnersAssociationFees;
 
-        RemainingPrinciple.Add(PurchasePrice - DownPayment);
-        TotalAmountPaid.Add(DownPayment);
-        TotalPrinciplePaid.Add(DownPayment);
         TotalFeesPaid.Add(0.0);
-        TotalInterestPaid.Add(0.0);
         TotalAmountLost.Add(0.0);
 
         RunModel();
     }
 
+    private List<double> TotalInterestPaid { get; } = new();
+    private int PurchasePrice { get; init; }
+    private int DownPayment { get; init; }
+    private double LoanAmount { get; init; }
+    private double AnnualAnnualInterestRate { get; init; }
+    private double MonthlyInterestRate { get; init; }
+    private List<double> RemainingPrinciple { get; } = new();
+    private List<double> TotalPrinciplePaid { get; } = new();
+    private List<double> TotalAmountPaid { get; } = new();
     private int PropertyTax { get; } //monthly
     private int HomeInsurance { get; } //monthly
     private int MortgageInsurance { get; } //monthly
@@ -50,6 +59,16 @@ public class MortgageModel : LoanModel
             RemainingPrinciple.Add(RemainingPrinciple[^1] - CalcMonthlyPrinciplePayment());
             TotalAmountLost.Add(TotalAmountLost[^1] + CalcAmountLost());
         }
+    }
+
+    public override double CalcTotalGain()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override double CalcTotalLoss()
+    {
+        throw new NotImplementedException();
     }
 
     private double CalcTotalMonthlyPayment()
@@ -74,8 +93,24 @@ public class MortgageModel : LoanModel
     {
         return PurchasePrice * 0.01 / 12;
     }
-    
-    public new void Print()
+
+    private double CalcMonthlyInterestPayment()
+    {
+        return RemainingPrinciple[^1] * MonthlyInterestRate;
+    }
+
+    private double CalcMonthlyPrinciplePayment()
+    {
+        return CalcMonthlyLoanPayment() - CalcMonthlyInterestPayment();
+    }
+
+    private double CalcMonthlyLoanPayment()
+    {
+        return LoanAmount * MonthlyInterestRate * Math.Pow(1 + MonthlyInterestRate, GetTotalMonths()) /
+               (Math.Pow(1 + MonthlyInterestRate, GetTotalMonths()) - 1);
+    }
+
+    public void Print()
     {
         for (var i = 0; i < GetTotalMonths(); i++)
         {

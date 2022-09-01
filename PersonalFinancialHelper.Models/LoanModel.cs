@@ -2,14 +2,8 @@
 
 public class LoanModel : BaseModel
 {
-    protected LoanModel()
+    public LoanModel(DateTime startDate, DateTime endDate, int purchasePrice, int downPayment, double annualInterestRate) : base(startDate, endDate)
     {
-    }
-
-    public LoanModel(DateTime startDate, DateTime endDate, int purchasePrice, int downPayment, double annualInterestRate)
-    {
-        StartDate = startDate;
-        EndDate = endDate;
         PurchasePrice = purchasePrice;
         DownPayment = downPayment;
         LoanAmount = PurchasePrice - DownPayment;
@@ -24,15 +18,15 @@ public class LoanModel : BaseModel
         RunModel();
     }
 
-    protected int PurchasePrice { get; init; }
-    protected int DownPayment { get; init; }
-    protected int LoanAmount { get; init; }
-    protected double AnnualAnnualInterestRate { get; init; }
-    protected double MonthlyInterestRate { get; init; }
-    protected List<double> RemainingPrinciple { get; } = new();
-    protected List<double> TotalAmountPaid { get; } = new();
-    protected List<double> TotalPrinciplePaid { get; } = new();
-    protected List<double> TotalInterestPaid { get; } = new();
+    private int PurchasePrice { get; }
+    private int DownPayment { get; }
+    private int LoanAmount { get; }
+    private double AnnualAnnualInterestRate { get; }
+    private double MonthlyInterestRate { get; }
+    private List<double> RemainingPrinciple { get; } = new();
+    private List<double> TotalAmountPaid { get; } = new();
+    private List<double> TotalPrinciplePaid { get; } = new();
+    private List<double> TotalInterestPaid { get; } = new();
 
     public void Print()
     {
@@ -46,7 +40,7 @@ public class LoanModel : BaseModel
         }
     }
 
-    public override void RunModel()
+    public sealed override void RunModel()
     {
         for (var i = 0; i < GetTotalMonths(); i++)
         {
@@ -67,17 +61,17 @@ public class LoanModel : BaseModel
         throw new NotImplementedException();
     }
 
-    protected double CalcMonthlyInterestPayment()
+    private double CalcMonthlyInterestPayment()
     {
         return RemainingPrinciple[^1] * MonthlyInterestRate;
     }
 
-    protected double CalcMonthlyPrinciplePayment()
+    private double CalcMonthlyPrinciplePayment()
     {
         return CalcMonthlyLoanPayment() - CalcMonthlyInterestPayment();
     }
 
-    protected double CalcMonthlyLoanPayment()
+    private double CalcMonthlyLoanPayment()
     {
         return LoanAmount * MonthlyInterestRate * Math.Pow(1 + MonthlyInterestRate, GetTotalMonths()) /
                (Math.Pow(1 + MonthlyInterestRate, GetTotalMonths()) - 1);

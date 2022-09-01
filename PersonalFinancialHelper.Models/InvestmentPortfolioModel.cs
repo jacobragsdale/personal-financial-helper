@@ -3,9 +3,8 @@
 public class InvestmentPortfolioModel : BaseModel
 {
     public InvestmentPortfolioModel(DateTime startDate, DateTime endDate, int initialInvestment, int monthlyDeposit, double expectedAnnualReturn)
+    : base(startDate, endDate)
     {
-        StartDate = startDate;
-        EndDate = endDate;
         InitialInvestment = initialInvestment;
         MonthlyDeposit = monthlyDeposit;
         ExpectedAnnualReturn = expectedAnnualReturn;

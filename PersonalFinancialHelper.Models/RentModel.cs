@@ -2,10 +2,9 @@
 
 public class RentModel : BaseModel
 {
-    public RentModel(DateTime startDate, DateTime endDate, int monthlyRent, int parkingFee, int rentersInsurance)
+    public RentModel(DateTime startDate, DateTime endDate, int monthlyRent, int parkingFee, int rentersInsurance) : 
+        base(startDate, endDate)
     {
-        StartDate = startDate;
-        EndDate = endDate;
         MonthlyRent = monthlyRent;
         ParkingFee = parkingFee;
         RentersInsurance = rentersInsurance;
