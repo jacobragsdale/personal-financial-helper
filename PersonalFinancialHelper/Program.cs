@@ -33,7 +33,7 @@ public static class Program
         };
         
         var basket = new BasketModel(startDate, endDate, models);
-        Console.WriteLine(basket.GetTotalGain(endDate.AddMonths(-1)));
-        Console.WriteLine(basket.GetTotalLoss(endDate.AddMonths(-1)));
+        Console.WriteLine("Total Gains:\t" + basket.GetTotalGain(endDate.AddMonths(-1)));
+        Console.WriteLine("Total Losses:\t" + basket.GetTotalLoss(endDate.AddMonths(-1)));
     }
 }

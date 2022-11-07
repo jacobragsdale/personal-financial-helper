@@ -26,8 +26,8 @@ public class RentModel : BaseModel
         for (var date = StartDate.AddMonths(1); date < EndDate; date = date.AddMonths(1))
         {
             TotalAmountPaid.Add(date, TotalAmountPaid[date.AddMonths(-1)] + CalcTotalMonthlyPayment());
-            TotalGain.Add(date, TotalGain[date.AddMonths(-1)] + GetTotalGain(date.AddMonths(-1)));
-            TotalLoss.Add(date, TotalLoss[date.AddMonths(-1)] + GetTotalLoss(date.AddMonths(-1)));
+            TotalGain.Add(date, 0.0);
+            TotalLoss.Add(date, TotalLoss[date.AddMonths(-1)] + CalcTotalMonthlyPayment());
         }
     }
 
