@@ -60,9 +60,9 @@ public class LoanModel : BaseModel
     }
     
     
-    public void Print()
+    public override void Print()
     {
-        for (var date = StartDate.AddMonths(1); date < EndDate; date = date.AddMonths(1))
+        for (var date = StartDate; date < EndDate; date = date.AddMonths(1))
         {
             Console.WriteLine("\n============================================\n");
             Console.WriteLine(date);

@@ -32,4 +32,9 @@ public class BasketModel : BaseModel
     {
         return _models.Sum(model => model.GetTotalLoss(date));
     }
+
+    public override void Print()
+    {
+        throw new NotImplementedException();
+    }
 }

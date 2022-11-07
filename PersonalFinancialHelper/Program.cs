@@ -22,17 +22,19 @@ public static class Program
     public static void Main()
     {
         var startDate = new DateTime(2022, 1, 1);
-        var endDate = new DateTime(2028, 1, 1);
-        
+        var endDate = new DateTime(2023, 1, 1);
+
         var models = new List<BaseModel>
         {
-            new MortgageModel(startDate, endDate, 349900, 13000,  .04766, 176, 211, 190, 140),
+            new MortgageModel(startDate, endDate, 349900, 13000, .04766, 176, 211, 190, 140),
             new RentModel(startDate, endDate, 2000, 0, 14),
             new LoanModel(startDate, endDate, 30000, 15000, .08766),
             new InvestmentPortfolioModel(startDate, endDate, 20000, 2000, 0.10),
         };
-        
+
         var basket = new BasketModel(startDate, endDate, models);
+        Console.WriteLine("\n============================================");
+        Console.WriteLine("============================================\n");
         Console.WriteLine("Total Gains:\t" + basket.GetTotalGain(endDate.AddMonths(-1)));
         Console.WriteLine("Total Losses:\t" + basket.GetTotalLoss(endDate.AddMonths(-1)));
     }

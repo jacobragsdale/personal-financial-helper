@@ -15,7 +15,6 @@ public class MortgageModel : BaseModel
     private int HomeInsurance { get; } //monthly
     private int MortgageInsurance { get; } //monthly
     private int HomeOwnersAssociationFees { get; } //monthly
-    private IDictionary<DateTime, double> TotalAmountLost { get; } = new Dictionary<DateTime, double>();
     private IDictionary<DateTime, double> TotalFeesPaid { get; } = new Dictionary<DateTime, double>();
     
     public MortgageModel(DateTime startDate, DateTime endDate, int purchasePrice, int downPayment,
@@ -38,7 +37,6 @@ public class MortgageModel : BaseModel
         HomeOwnersAssociationFees = homeOwnersAssociationFees;
 
         TotalFeesPaid.Add(StartDate, 0.0);
-        TotalAmountLost.Add(StartDate, 0.0);
         TotalGain.Add(StartDate, 0.0);
         TotalLoss.Add(StartDate, 0.0);
 
@@ -54,9 +52,8 @@ public class MortgageModel : BaseModel
             TotalPrinciplePaid.Add(date, CalcMonthlyPrinciplePayment(date.AddMonths(-1)));
             TotalFeesPaid.Add(date, TotalFeesPaid[date.AddMonths(-1)] + CalcMonthlyFees());
             TotalAmountPaid.Add(date, TotalAmountPaid[date.AddMonths(-1)] + CalcTotalMonthlyPayment());
-            TotalAmountLost.Add(date, TotalAmountLost[date.AddMonths(-1)] + CalcAmountLost(date.AddMonths(-1)));
             TotalGain.Add(date, 0.0);
-            TotalLoss.Add(date, TotalAmountLost[date]);
+            TotalLoss.Add(date, TotalLoss[date.AddMonths(-1)] + CalcAmountLost(date.AddMonths(-1)));
         }
     }
 
@@ -99,9 +96,9 @@ public class MortgageModel : BaseModel
                (Math.Pow(1 + MonthlyInterestRate, GetTotalMonths()) - 1);
     }
 
-    public void Print()
+    public override void Print()
     {
-        for (var date = StartDate.AddMonths(1); date < EndDate; date = date.AddMonths(1))
+        for (var date = StartDate; date < EndDate; date = date.AddMonths(1))
         {
             Console.WriteLine("\n============================================\n");
             Console.WriteLine(date);
@@ -109,7 +106,7 @@ public class MortgageModel : BaseModel
             Console.WriteLine("Total Interest Paid:\t" + TotalInterestPaid[date].ToString("$#,##0.00"));
             Console.WriteLine("Total Fees Paid:\t" + TotalFeesPaid[date].ToString("$#,##0.00"));
             Console.WriteLine("Total Amount Paid:\t" + TotalAmountPaid[date].ToString("$#,##0.00"));
-            Console.WriteLine("Total Amount Lost:\t" + TotalAmountLost[date].ToString("$#,##0.00"));
+            Console.WriteLine("Total Amount Lost:\t" + TotalLoss[date].ToString("$#,##0.00"));
         }
     }
 }

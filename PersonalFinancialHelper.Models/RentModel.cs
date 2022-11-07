@@ -5,8 +5,6 @@ public class RentModel : BaseModel
     private int MonthlyRent { get; }
     private int ParkingFee { get; }
     private int RentersInsurance { get; }
-    private IDictionary<DateTime, double> TotalAmountPaid { get; } = new Dictionary<DateTime, double>();
-
 
     public RentModel(DateTime startDate, DateTime endDate, int monthlyRent, int parkingFee, int rentersInsurance) : 
         base(startDate, endDate)
@@ -14,7 +12,6 @@ public class RentModel : BaseModel
         MonthlyRent = monthlyRent;
         ParkingFee = parkingFee;
         RentersInsurance = rentersInsurance;
-        TotalAmountPaid.Add(StartDate, CalcTotalMonthlyPayment());
         TotalGain.Add(StartDate, 0);
         TotalLoss.Add(StartDate, CalcTotalMonthlyPayment());
 
@@ -25,7 +22,6 @@ public class RentModel : BaseModel
     {
         for (var date = StartDate.AddMonths(1); date < EndDate; date = date.AddMonths(1))
         {
-            TotalAmountPaid.Add(date, TotalAmountPaid[date.AddMonths(-1)] + CalcTotalMonthlyPayment());
             TotalGain.Add(date, 0.0);
             TotalLoss.Add(date, TotalLoss[date.AddMonths(-1)] + CalcTotalMonthlyPayment());
         }
@@ -36,7 +32,7 @@ public class RentModel : BaseModel
         return MonthlyRent + ParkingFee + RentersInsurance;
     }
     
-    public void Print()
+    public override void Print()
     {
         for (var date = StartDate; date < EndDate; date = date.AddMonths(1))
         {

@@ -29,4 +29,6 @@ public abstract class BaseModel
     }
 
     public abstract void RunModel();
+
+    public abstract void Print();
 }
