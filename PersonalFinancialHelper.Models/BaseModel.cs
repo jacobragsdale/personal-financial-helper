@@ -2,17 +2,15 @@
 
 public abstract class BaseModel
 {
-    protected DateTime StartDate { get; init; }
-    protected DateTime EndDate { get; init; }
-    protected List<DateTime> CurrentDate { get; } = new();
-    protected List<double> TotalGain { get; } = new();
-    protected List<double> TotalLoss { get; } = new();
+    protected DateTime StartDate { get; }
+    protected DateTime EndDate { get; }
+    protected IDictionary<DateTime, double> TotalGain { get; } = new Dictionary<DateTime, double>();
+    protected IDictionary<DateTime, double> TotalLoss { get; } = new Dictionary<DateTime, double>();
 
     protected BaseModel(DateTime startDate, DateTime endDate)
     {
         StartDate = startDate;
         EndDate = endDate;
-        CurrentDate.Add(startDate);
     }
 
     protected int GetTotalMonths()
@@ -20,12 +18,7 @@ public abstract class BaseModel
         return (EndDate.Year - StartDate.Year) * 12 + EndDate.Month - StartDate.Month;
     }
 
-    protected void IncrementCurrentDate()
-    {
-        CurrentDate.Add(CurrentDate[^1].AddMonths(1));
-    }
-
     public abstract void RunModel();
-    public abstract double CalcTotalGain();
-    public abstract double CalcTotalLoss();
+    public abstract double GetTotalGain(DateTime date);
+    public abstract double GetTotalLoss(DateTime date);
 }

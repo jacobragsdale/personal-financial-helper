@@ -10,10 +10,10 @@ public class LoanModel : BaseModel
         AnnualAnnualInterestRate = annualInterestRate;
         MonthlyInterestRate = AnnualAnnualInterestRate / 12;
 
-        RemainingPrinciple.Add(PurchasePrice - DownPayment);
-        TotalAmountPaid.Add(DownPayment);
-        TotalPrinciplePaid.Add(DownPayment);
-        TotalInterestPaid.Add(0.0);
+        RemainingPrinciple.Add(StartDate, PurchasePrice - DownPayment);
+        TotalAmountPaid.Add(StartDate, DownPayment);
+        TotalPrinciplePaid.Add(StartDate, DownPayment);
+        TotalInterestPaid.Add(StartDate, 0.0);
 
         RunModel();
     }
@@ -23,52 +23,52 @@ public class LoanModel : BaseModel
     private int LoanAmount { get; }
     private double AnnualAnnualInterestRate { get; }
     private double MonthlyInterestRate { get; }
-    private List<double> RemainingPrinciple { get; } = new();
-    private List<double> TotalAmountPaid { get; } = new();
-    private List<double> TotalPrinciplePaid { get; } = new();
-    private List<double> TotalInterestPaid { get; } = new();
+    private IDictionary<DateTime, double> RemainingPrinciple { get; } = new Dictionary<DateTime, double>();
+    private IDictionary<DateTime, double> TotalAmountPaid { get; } = new Dictionary<DateTime, double>();
+    private IDictionary<DateTime, double> TotalPrinciplePaid { get; } = new Dictionary<DateTime, double>();
+    private IDictionary<DateTime, double> TotalInterestPaid { get; } = new Dictionary<DateTime, double>();
 
     public void Print()
     {
-        for (var i = 0; i < GetTotalMonths(); i++)
+        for (var date = StartDate.AddMonths(1); date < EndDate; date = date.AddMonths(1))
         {
             Console.WriteLine("\n============================================\n");
-            Console.WriteLine("Month " + i);
-            Console.WriteLine("Total Principle Paid:\t" + TotalPrinciplePaid[i].ToString("$#,##0.00"));
-            Console.WriteLine("Total Interest Paid:\t" + TotalInterestPaid[i].ToString("$#,##0.00"));
-            Console.WriteLine("Total Amount Paid:\t" + TotalAmountPaid[i].ToString("$#,##0.00"));
+            Console.WriteLine(date);
+            Console.WriteLine("Total Principle Paid:\t" + TotalPrinciplePaid[date].ToString("$#,##0.00"));
+            Console.WriteLine("Total Interest Paid:\t" + TotalInterestPaid[date].ToString("$#,##0.00"));
+            Console.WriteLine("Total Amount Paid:\t" + TotalAmountPaid[date].ToString("$#,##0.00"));
         }
     }
 
     public sealed override void RunModel()
     {
-        for (var i = 0; i < GetTotalMonths(); i++)
+        for (var date = StartDate.AddMonths(1); date < EndDate; date = date.AddMonths(1))
         {
-            TotalAmountPaid.Add(TotalAmountPaid[^1] + CalcMonthlyLoanPayment());
-            TotalPrinciplePaid.Add(TotalPrinciplePaid[^1] + CalcMonthlyPrinciplePayment());
-            TotalInterestPaid.Add(TotalInterestPaid[^1] + CalcMonthlyInterestPayment());
-            RemainingPrinciple.Add(RemainingPrinciple[^1] - CalcMonthlyPrinciplePayment());
+            TotalAmountPaid.Add(date, TotalAmountPaid[date.AddMonths(-1)] + CalcMonthlyLoanPayment());
+            RemainingPrinciple.Add(date, RemainingPrinciple[date.AddMonths(-1)] - CalcMonthlyPrinciplePayment(date.AddMonths(-1)));
+            TotalPrinciplePaid.Add(date, TotalPrinciplePaid[date.AddMonths(-1)] + CalcMonthlyPrinciplePayment(date.AddMonths(-1)));
+            TotalInterestPaid.Add(date, TotalInterestPaid[date.AddMonths(-1)] + CalcMonthlyInterestPayment(date.AddMonths(-1)));
         }
     }
 
-    public override double CalcTotalGain()
+    public override double GetTotalGain(DateTime date)
     {
-        throw new NotImplementedException();
+        return 0.0;
+    }
+    
+    public override double GetTotalLoss(DateTime date)
+    {
+        return CalcMonthlyInterestPayment(date);
     }
 
-    public override double CalcTotalLoss()
+    private double CalcMonthlyInterestPayment(DateTime date)
     {
-        throw new NotImplementedException();
+        return RemainingPrinciple[date] * MonthlyInterestRate;
     }
 
-    private double CalcMonthlyInterestPayment()
+    private double CalcMonthlyPrinciplePayment(DateTime date)
     {
-        return RemainingPrinciple[^1] * MonthlyInterestRate;
-    }
-
-    private double CalcMonthlyPrinciplePayment()
-    {
-        return CalcMonthlyLoanPayment() - CalcMonthlyInterestPayment();
+        return CalcMonthlyLoanPayment() - CalcMonthlyInterestPayment(date);
     }
 
     private double CalcMonthlyLoanPayment()

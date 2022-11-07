@@ -8,45 +8,46 @@ public class RentModel : BaseModel
         MonthlyRent = monthlyRent;
         ParkingFee = parkingFee;
         RentersInsurance = rentersInsurance;
-        TotalAmountPaid.Add(CalcTotalMonthlyPayment());
-        TotalGain.Add(0);
-        TotalLoss.Add(CalcTotalMonthlyPayment());
+        TotalAmountPaid.Add(StartDate, CalcTotalMonthlyPayment());
+        TotalGain.Add(StartDate, 0);
+        TotalLoss.Add(StartDate, CalcTotalMonthlyPayment());
 
         RunModel();
     }
 
     private int MonthlyRent { get; }
     private int ParkingFee { get; }
-    private int RentersInsurance { get; } //14.00
-    private List<int> TotalAmountPaid { get; } = new();
+    private int RentersInsurance { get; }
+    private IDictionary<DateTime, double> TotalAmountPaid { get; } = new Dictionary<DateTime, double>();
 
     public void Print()
     {
-        for (var i = 0; i < GetTotalMonths(); i++)
+        for (var date = StartDate; date < EndDate; date = date.AddMonths(1))
         {
             Console.WriteLine("\n============================================\n");
-            Console.WriteLine("Month " + i);
-            Console.WriteLine("Total Amount Paid:\t" + TotalAmountPaid[i].ToString("$#,##0.00"));
+            Console.WriteLine(date);
+            Console.WriteLine("Total Gain:\t" + TotalGain[date].ToString("$#,##0.00"));
+            Console.WriteLine("Total Loss:\t" + TotalLoss[date.Date].ToString("$#,##0.00"));
         }
     }
 
-    public sealed override double CalcTotalGain()
+    public sealed override double GetTotalGain(DateTime date)
     {
         return 0.0;
     }
 
-    public sealed override double CalcTotalLoss()
+    public sealed override double GetTotalLoss(DateTime date)
     {
         return CalcTotalMonthlyPayment();
     }
 
     public sealed override void RunModel()
     {
-        for (var i = 0; i < GetTotalMonths(); i++)
+        for (var date = StartDate.AddMonths(1); date < EndDate; date = date.AddMonths(1))
         {
-            TotalAmountPaid.Add(TotalAmountPaid[^1] + CalcTotalMonthlyPayment());
-            TotalGain.Add(TotalGain[^1] + CalcTotalGain());
-            TotalLoss.Add(TotalLoss[^1] + CalcTotalLoss());
+            TotalAmountPaid.Add(date, TotalAmountPaid[date.AddMonths(-1)] + CalcTotalMonthlyPayment());
+            TotalGain.Add(date, TotalGain[date.AddMonths(-1)] + GetTotalGain(date.AddMonths(-1)));
+            TotalLoss.Add(date, TotalLoss[date.AddMonths(-1)] + GetTotalLoss(date.AddMonths(-1)));
         }
     }
 

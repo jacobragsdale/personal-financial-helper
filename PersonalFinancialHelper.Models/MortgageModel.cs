@@ -3,7 +3,7 @@
 //TODO:
 // Calc Opportunity Costs
 // Make some constants
-// 
+//
 
 public class MortgageModel : BaseModel
 {
@@ -61,12 +61,12 @@ public class MortgageModel : BaseModel
         }
     }
 
-    public override double CalcTotalGain()
+    public override double GetTotalGain(DateTime date)
     {
         throw new NotImplementedException();
     }
 
-    public override double CalcTotalLoss()
+    public override double GetTotalLoss(DateTime date)
     {
         throw new NotImplementedException();
     }
