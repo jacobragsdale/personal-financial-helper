@@ -3,10 +3,9 @@
 namespace PersonalFinancialHelper;
 
 /*
- * TODO:
-     * Confirm all models are working as expected - 
-        *  Mortgage can be cleaned up, TotalGain and TotalLoss can replace existing variables
-     * Design Basket Model
+ *
+ *  Add Net Worth to BaseModel
+ *  Add Home Appreciation
      * Write changes needed to be made to Base Model
      * Re confirm all models are working
      * Build TUI

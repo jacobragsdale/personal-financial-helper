@@ -7,20 +7,11 @@ public class BasketModel : BaseModel
     public BasketModel(DateTime startDate, DateTime endDate, IEnumerable<BaseModel> models) : base(startDate, endDate)
     {
         _models.AddRange(models);
-        // RunModel();
-    }
-    
-    public void AddToBasket(BaseModel model)
-    {
-        _models.Add(model);
     }
 
     public sealed override void RunModel()
     {
-        foreach (var item in _models)
-        {
-            // item.RunModel();
-        }
+        throw new NotImplementedException();
     }
 
     public new double GetTotalGain(DateTime date)
