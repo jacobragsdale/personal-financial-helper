@@ -4,7 +4,8 @@ namespace PersonalFinancialHelper;
 
 /*
  * TODO:
-     * Confirm all models are working as expected
+     * Confirm all models are working as expected - 
+        *  Mortgage can be cleaned up, TotalGain and TotalLoss can replace existing variables
      * Design Basket Model
      * Write changes needed to be made to Base Model
      * Re confirm all models are working
@@ -23,15 +24,16 @@ public static class Program
         var startDate = new DateTime(2022, 1, 1);
         var endDate = new DateTime(2028, 1, 1);
         
-        var mortgage = new MortgageModel(startDate, endDate, 349900, 13000,  .04766, 176, 211, 190, 140);
-        // mortgage.Print();
-        var rent = new RentModel(startDate, endDate, 2000, 0, 14);
-        rent.Print();
-
-        var loan = new LoanModel(startDate, endDate, 30000, 15000, .08766);
-        // loan.Print();
-
-        var portfolio = new InvestmentPortfolioModel(startDate, endDate, 20000, 2000, 0.10);
-        // portfolio.Print();
+        var models = new List<BaseModel>
+        {
+            new MortgageModel(startDate, endDate, 349900, 13000,  .04766, 176, 211, 190, 140),
+            new RentModel(startDate, endDate, 2000, 0, 14),
+            new LoanModel(startDate, endDate, 30000, 15000, .08766),
+            new InvestmentPortfolioModel(startDate, endDate, 20000, 2000, 0.10),
+        };
+        
+        var basket = new BasketModel(startDate, endDate, models);
+        Console.WriteLine(basket.GetTotalGain(endDate.AddMonths(-1)));
+        Console.WriteLine(basket.GetTotalLoss(endDate.AddMonths(-1)));
     }
 }

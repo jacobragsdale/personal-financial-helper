@@ -2,6 +2,16 @@
 
 public class LoanModel : BaseModel
 {
+    private int PurchasePrice { get; }
+    private int DownPayment { get; }
+    private int LoanAmount { get; }
+    private double AnnualAnnualInterestRate { get; }
+    private double MonthlyInterestRate { get; }
+    private IDictionary<DateTime, double> RemainingPrinciple { get; } = new Dictionary<DateTime, double>();
+    private IDictionary<DateTime, double> TotalAmountPaid { get; } = new Dictionary<DateTime, double>();
+    private IDictionary<DateTime, double> TotalPrinciplePaid { get; } = new Dictionary<DateTime, double>();
+    private IDictionary<DateTime, double> TotalInterestPaid { get; } = new Dictionary<DateTime, double>();
+    
     public LoanModel(DateTime startDate, DateTime endDate, int purchasePrice, int downPayment, double annualInterestRate) : base(startDate, endDate)
     {
         PurchasePrice = purchasePrice;
@@ -14,30 +24,10 @@ public class LoanModel : BaseModel
         TotalAmountPaid.Add(StartDate, DownPayment);
         TotalPrinciplePaid.Add(StartDate, DownPayment);
         TotalInterestPaid.Add(StartDate, 0.0);
+        TotalGain.Add(StartDate, 0.0);
+        TotalLoss.Add(StartDate, 0.0);
 
         RunModel();
-    }
-
-    private int PurchasePrice { get; }
-    private int DownPayment { get; }
-    private int LoanAmount { get; }
-    private double AnnualAnnualInterestRate { get; }
-    private double MonthlyInterestRate { get; }
-    private IDictionary<DateTime, double> RemainingPrinciple { get; } = new Dictionary<DateTime, double>();
-    private IDictionary<DateTime, double> TotalAmountPaid { get; } = new Dictionary<DateTime, double>();
-    private IDictionary<DateTime, double> TotalPrinciplePaid { get; } = new Dictionary<DateTime, double>();
-    private IDictionary<DateTime, double> TotalInterestPaid { get; } = new Dictionary<DateTime, double>();
-
-    public void Print()
-    {
-        for (var date = StartDate.AddMonths(1); date < EndDate; date = date.AddMonths(1))
-        {
-            Console.WriteLine("\n============================================\n");
-            Console.WriteLine(date);
-            Console.WriteLine("Total Principle Paid:\t" + TotalPrinciplePaid[date].ToString("$#,##0.00"));
-            Console.WriteLine("Total Interest Paid:\t" + TotalInterestPaid[date].ToString("$#,##0.00"));
-            Console.WriteLine("Total Amount Paid:\t" + TotalAmountPaid[date].ToString("$#,##0.00"));
-        }
     }
 
     public sealed override void RunModel()
@@ -48,17 +38,9 @@ public class LoanModel : BaseModel
             RemainingPrinciple.Add(date, RemainingPrinciple[date.AddMonths(-1)] - CalcMonthlyPrinciplePayment(date.AddMonths(-1)));
             TotalPrinciplePaid.Add(date, TotalPrinciplePaid[date.AddMonths(-1)] + CalcMonthlyPrinciplePayment(date.AddMonths(-1)));
             TotalInterestPaid.Add(date, TotalInterestPaid[date.AddMonths(-1)] + CalcMonthlyInterestPayment(date.AddMonths(-1)));
+            TotalGain.Add(date, 0.0);
+            TotalLoss.Add(date, TotalInterestPaid[date]);
         }
-    }
-
-    public override double GetTotalGain(DateTime date)
-    {
-        return 0.0;
-    }
-    
-    public override double GetTotalLoss(DateTime date)
-    {
-        return CalcMonthlyInterestPayment(date);
     }
 
     private double CalcMonthlyInterestPayment(DateTime date)
@@ -75,5 +57,18 @@ public class LoanModel : BaseModel
     {
         return LoanAmount * MonthlyInterestRate * Math.Pow(1 + MonthlyInterestRate, GetTotalMonths()) /
                (Math.Pow(1 + MonthlyInterestRate, GetTotalMonths()) - 1);
+    }
+    
+    
+    public void Print()
+    {
+        for (var date = StartDate.AddMonths(1); date < EndDate; date = date.AddMonths(1))
+        {
+            Console.WriteLine("\n============================================\n");
+            Console.WriteLine(date);
+            Console.WriteLine("Total Principle Paid:\t" + TotalPrinciplePaid[date].ToString("$#,##0.00"));
+            Console.WriteLine("Total Interest Paid:\t" + TotalInterestPaid[date].ToString("$#,##0.00"));
+            Console.WriteLine("Total Amount Paid:\t" + TotalAmountPaid[date].ToString("$#,##0.00"));
+        }
     }
 }

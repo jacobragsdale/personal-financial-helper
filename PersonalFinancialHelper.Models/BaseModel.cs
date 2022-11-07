@@ -12,13 +12,21 @@ public abstract class BaseModel
         StartDate = startDate;
         EndDate = endDate;
     }
+    
+    public double GetTotalGain(DateTime date)
+    {
+        return TotalGain[date];
+    }
 
+    public double GetTotalLoss(DateTime date)
+    {
+        return TotalLoss[date];
+    }
+    
     protected int GetTotalMonths()
     {
         return (EndDate.Year - StartDate.Year) * 12 + EndDate.Month - StartDate.Month;
     }
 
     public abstract void RunModel();
-    public abstract double GetTotalGain(DateTime date);
-    public abstract double GetTotalLoss(DateTime date);
 }

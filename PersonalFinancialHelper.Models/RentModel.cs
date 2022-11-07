@@ -2,6 +2,12 @@
 
 public class RentModel : BaseModel
 {
+    private int MonthlyRent { get; }
+    private int ParkingFee { get; }
+    private int RentersInsurance { get; }
+    private IDictionary<DateTime, double> TotalAmountPaid { get; } = new Dictionary<DateTime, double>();
+
+
     public RentModel(DateTime startDate, DateTime endDate, int monthlyRent, int parkingFee, int rentersInsurance) : 
         base(startDate, endDate)
     {
@@ -14,33 +20,7 @@ public class RentModel : BaseModel
 
         RunModel();
     }
-
-    private int MonthlyRent { get; }
-    private int ParkingFee { get; }
-    private int RentersInsurance { get; }
-    private IDictionary<DateTime, double> TotalAmountPaid { get; } = new Dictionary<DateTime, double>();
-
-    public void Print()
-    {
-        for (var date = StartDate; date < EndDate; date = date.AddMonths(1))
-        {
-            Console.WriteLine("\n============================================\n");
-            Console.WriteLine(date);
-            Console.WriteLine("Total Gain:\t" + TotalGain[date].ToString("$#,##0.00"));
-            Console.WriteLine("Total Loss:\t" + TotalLoss[date.Date].ToString("$#,##0.00"));
-        }
-    }
-
-    public sealed override double GetTotalGain(DateTime date)
-    {
-        return 0.0;
-    }
-
-    public sealed override double GetTotalLoss(DateTime date)
-    {
-        return CalcTotalMonthlyPayment();
-    }
-
+    
     public sealed override void RunModel()
     {
         for (var date = StartDate.AddMonths(1); date < EndDate; date = date.AddMonths(1))
@@ -54,5 +34,16 @@ public class RentModel : BaseModel
     private int CalcTotalMonthlyPayment()
     {
         return MonthlyRent + ParkingFee + RentersInsurance;
+    }
+    
+    public void Print()
+    {
+        for (var date = StartDate; date < EndDate; date = date.AddMonths(1))
+        {
+            Console.WriteLine("\n============================================\n");
+            Console.WriteLine(date);
+            Console.WriteLine("Total Gain:\t" + TotalGain[date].ToString("$#,##0.00"));
+            Console.WriteLine("Total Loss:\t" + TotalLoss[date.Date].ToString("$#,##0.00"));
+        }
     }
 }
